@@ -22,6 +22,7 @@ Whimsical
 Dystopian
 
 3. Adaptation Hub
+
 Description:
 Every book with a movie or TV adaptation gets its own comparison page.
 
@@ -32,6 +33,7 @@ Side-by-side comparison
 Adaptation details
 
 4. Adaptation Rating System 
+
 Description:
 Instead of giving only one overall score, users rate different aspects of an adaptation.
 For example:
