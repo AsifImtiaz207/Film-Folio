@@ -3,12 +3,15 @@ We're building a website that connects books and movies through recommendations 
 
 **FEATURES**
 1. Cross-Media Recommendation Engine
+
 Description:
 Users can select a book or movie, and the website recommends titles from the other medium. Recommends books based on movies and movies based on books using shared genres, themes, and vibes.
 
 2. Mood & Vibe Discovery
+
 Description
 Instead of searching only by genre, users can browse stories using emotional and thematic filters.
+
 Examples:
 Cozy
 Found Family
@@ -21,6 +24,7 @@ Dystopian
 3. Adaptation Hub
 Description:
 Every book with a movie or TV adaptation gets its own comparison page.
+
 Users can view:
 Book information
 Movie information
@@ -40,6 +44,7 @@ Overall adaptation quality
 
   Description:
   Users create their own collections. Enables users to save favorites, create reading/watch lists, and organize stories they want to experience.
+  
   Examples:
   Currently Reading
   Want to Read
@@ -51,6 +56,7 @@ Overall adaptation quality
 
   Description:
   Users answer a short quiz about what they're looking for—for example:
+  
   What mood are you in?
   Do you want romance?
   Fast-paced or slow-paced?
