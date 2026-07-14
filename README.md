@@ -9,7 +9,7 @@ Users can select a book or movie, and the website recommends titles from the oth
 
 2. Mood & Vibe Discovery
 
-Description
+Description:
 Instead of searching only by genre, users can browse stories using emotional and thematic filters.
 
 Examples:
