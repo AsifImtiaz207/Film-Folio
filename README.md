@@ -27,7 +27,7 @@ Movie information
 Side-by-side comparison
 Adaptation details
 
-4.Adaptation Rating System 
+4. Adaptation Rating System 
 Description:
 Instead of giving only one overall score, users rate different aspects of an adaptation.
 For example:
@@ -36,7 +36,7 @@ Casting
 Storytelling
 Overall adaptation quality
 
-5.Personalized Bookshelf & Watchlist
+5. Personalized Bookshelf & Watchlist
 
 Description:
 Users create their own collections. Enables users to save favorites, create reading/watch lists, and organize stories they want to experience.
@@ -47,7 +47,7 @@ Watched
 Want to Watch
 Favorites
 
-6.Story Recommendation Quiz
+6. Story Recommendation Quiz
 
 Description:
 Users answer a short quiz about what they're looking for—for example:
