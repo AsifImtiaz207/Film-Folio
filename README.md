@@ -38,23 +38,23 @@ Overall adaptation quality
 
 5. Personalized Bookshelf & Watchlist
 
-Description:
-Users create their own collections. Enables users to save favorites, create reading/watch lists, and organize stories they want to experience.
-Examples:
-Currently Reading
-Want to Read
-Watched
-Want to Watch
-Favorites
+  Description:
+  Users create their own collections. Enables users to save favorites, create reading/watch lists, and organize stories they want to experience.
+  Examples:
+  Currently Reading
+  Want to Read
+  Watched
+  Want to Watch
+  Favorites
 
 6. Story Recommendation Quiz
 
-Description:
-Users answer a short quiz about what they're looking for—for example:
-What mood are you in?
-Do you want romance?
-Fast-paced or slow-paced?
-Happy or bittersweet ending?
-Book, movie, or both?
+  Description:
+  Users answer a short quiz about what they're looking for—for example:
+  What mood are you in?
+  Do you want romance?
+  Fast-paced or slow-paced?
+  Happy or bittersweet ending?
+  Book, movie, or both?
 
-Based on their answers, the website recommends books and/or movies that match their preferences.
+  Based on their answers, the website recommends books and/or movies that match their preferences.
