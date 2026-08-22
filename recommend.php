@@ -1,9 +1,12 @@
 <?php
 require_once 'config/db.php';
+include_once 'includes/header.php';
 
 $selectedMediaID = $_GET['id'] ?? null;
 $recommendations = [];
 $selectedMedia = null;
+
+$allMedia = $pdo->query("SELECT MediaID, title, mediatype FROM media ORDER BY title ASC")->fetchAll();
 
 if ($selectedMediaID) {
     $stmt = $pdo->prepare("SELECT * FROM media WHERE MediaID = ?");
@@ -12,6 +15,7 @@ if ($selectedMediaID) {
 
     if ($selectedMedia) {
         $targetType = ($selectedMedia['mediatype'] === 'Book') ? 'Movie' : 'Book';
+
         $sql = "
             SELECT m.*, COUNT(h2.TagID) AS shared_tags_count
             FROM has h1
@@ -22,7 +26,7 @@ if ($selectedMediaID) {
               AND m.mediatype = :targetType
             GROUP BY m.MediaID
             ORDER BY shared_tags_count DESC
-            LIMIT 5
+            LIMIT 6
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -32,44 +36,49 @@ if ($selectedMediaID) {
         $recommendations = $stmt->fetchAll();
     }
 }
-
-$allMedia = $pdo->query("SELECT MediaID, title, mediatype FROM media ORDER BY title ASC")->fetchAll();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Cross-Media Recommendations - Film-Folio</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <h1>Cross-Media Recommendation Engine</h1>
-    <form method="GET" action="recommend.php">
-        <label for="id">Select a Book or Movie:</label>
-        <select name="id" id="id" onchange="this.form.submit()">
-            <option value="">-- Choose Title --</option>
-            <?php foreach ($allMedia as $item): ?>
-                <option value="<?= $item['MediaID'] ?>" <?= $selectedMediaID == $item['MediaID'] ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($item['title']) ?> (<?= $item['mediatype'] ?>)
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
+<h1>Cross-Media Recommendations</h1>
+<p>Pick a book or movie to uncover similar stories from the opposite medium based on shared themes and tags.</p>
 
-    <?php if ($selectedMedia): ?>
-        <h2>Recommendations for "<?= htmlspecialchars($selectedMedia['title']) ?>" (<?= $selectedMedia['mediatype'] ?>):</h2>
-        <?php if (empty($recommendations)): ?>
-            <p>No cross-media matches found for this title.</p>
-        <?php else: ?>
-            <ul>
-                <?php foreach ($recommendations as $rec): ?>
-                    <li>
-                        <strong><?= htmlspecialchars($rec['title']) ?></strong> (<?= $rec['releaseyear'] ?>)
-                        - Matching Tags: <?= $rec['shared_tags_count'] ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+<form method="GET" action="recommend.php">
+    <label for="id">Select a Title:</label>
+    <select name="id" id="id" onchange="this.form.submit()">
+        <option value="">-- Select Book or Movie --</option>
+        <?php foreach ($allMedia as $item): ?>
+            <option value="<?= $item['MediaID'] ?>" <?= $selectedMediaID == $item['MediaID'] ? 'selected' : '' ?>>
+                <?= htmlspecialchars($item['title']) ?> (<?= $item['mediatype'] ?>)
+            </option>
+        <?php endforeach; ?>
+    </select>
+</form>
+
+<?php if ($selectedMedia): ?>
+    <h2>Recommendations for "<?= htmlspecialchars($selectedMedia['title']) ?>"</h2>
+    <p>Showing top matching <?= $selectedMedia['mediatype'] === 'Book' ? 'Movies' : 'Books' ?>:</p>
+    
+    <?php if (empty($recommendations)): ?>
+        <p><em>No cross-media matches found for this title yet.</em></p>
+    <?php else: ?>
+        <div class="media-grid">
+            <?php foreach ($recommendations as $rec): ?>
+                <div class="card">
+                    <div>
+                        <span class="badge <?= $rec['mediatype'] === 'Book' ? 'badge-book' : 'badge-movie' ?>">
+                            <?= htmlspecialchars($rec['mediatype']) ?>
+                        </span>
+                        <h3 style="margin-top: 10px;"><?= htmlspecialchars($rec['title']) ?> (<?= $rec['releaseyear'] ?>)</h3>
+                        <p><?= htmlspecialchars($rec['description']) ?></p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <span class="badge badge-tag">
+                            🔗 <?= $rec['shared_tags_count'] ?> Shared Tags
+                        </span>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
-</body>
-</html>
+<?php endif; ?>
+
+<?php include_once 'includes/footer.php'; ?>
